@@ -4,34 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textMain"
-        android:textSize="15sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
-    <fragment
-        android:id="@+id/fragment_first"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:name="com.hfad.adlesson6fragment.ChangeFragment"
-        tools:layout="@layout/fragment_change"
-        />
 
     <fragment
-        android:id="@+id/fragment_second"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:name="com.hfad.adlesson6fragment.TextFragment"
-        tools:layout="@layout/fragment_text"
-        />
-
-    <FrameLayout
-        android:id="@+id/fragment_container"
+        android:id="@+id/fragment_first_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:name="com.hfad.adlesson6fragment.ChangeFragment"
+        tools:layout="@layout/fragment_change"
         />
 </LinearLayout>

@@ -2,7 +2,5 @@ package com.hfad.adlesson6fragment;
 
 public interface IFragments {
 
-    void onFirstFragment();
-    void onSecondFragment();
-
+    void displayDetails(String title, String subtitle, int imageResourceId);
 }

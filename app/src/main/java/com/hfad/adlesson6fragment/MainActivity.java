@@ -5,12 +5,23 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
-public class MainActivity extends AppCompatActivity implements IFragments {
+public class MainActivity extends AppCompatActivity {
+
     private FragmentManager fragmentManager;
     private FragmentTransaction transaction;
     private Fragment fragment;
+
+    private View fragmentView;
+
+    private boolean mViewFragment = false;
+
+    public static String KEY = "key";
+    public static String KEY2 = "key2";
+    public  static final String KEY3 = "imgKey";
 
 
     @Override
@@ -18,26 +29,36 @@ public class MainActivity extends AppCompatActivity implements IFragments {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        fragmentManager = getSupportFragmentManager();
+        fragmentView = findViewById(R.id.fragment_second);
 
+        if (fragmentView != null){
+            mViewFragment = true;
+        }
+        if(mViewFragment) {
+            fragmentManager = getSupportFragmentManager();
+            transaction = fragmentManager.beginTransaction();
+
+            transaction.replace(R.id.fragment_first, new ChangeFragment());
+            transaction.commit();
+        }
     }
 
-    @Override
-    public void onFirstFragment() {
-        transaction = fragmentManager.beginTransaction();
-        transaction.add(R.id.fragment_container,ChangeFragment.newInstance("Hello, change first fragment", ""));
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
+    public void displayDetails(String title, String subTitle, int imageResourceId) {
 
-    @Override
-    public void onSecondFragment(){
+        View fragmentView = findViewById(R.id.fragment_second);
 
-        transaction = fragmentManager.beginTransaction();
-        transaction.add(R.id.fragment_container,
-                TextFragment.newInstance("Hello, change second fragment", ""));
-        transaction.addToBackStack(null);
-        transaction.commit();
+        if (fragmentView != null) {
+            fragmentManager = getSupportFragmentManager();
+            transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.fragment_second, TextFragment.newInstance(title, subTitle, imageResourceId));
+            transaction.commit();
+
+        } else {
+            Intent intent = new Intent(this, DetailsActivity.class);
+            intent.putExtra(KEY, title);
+            intent.putExtra(KEY2, subTitle);
+            intent.putExtra(KEY3,imageResourceId);
+            startActivity(intent);
+        }
     }
-    
 }
